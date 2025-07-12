@@ -10,7 +10,7 @@ export const GetRoasted = () => {
     return (
         <div className="flex flex-col px-10 py-10">
             <div>
-                <h1 className="font-bold text-5xl text-foreground">Why Get Roasted ?</h1>
+                <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl text-foreground">Why Get Roasted ?</h1>
             </div>
             <div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 mt-10 py-4 gap-4">
                 {items.map((item,key)=> (

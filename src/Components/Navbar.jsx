@@ -30,7 +30,7 @@ export const Navbar = () => {
       }`}>
             <div className="flex items-center justify-center gap-2 px-3 py-2 bg-transparent">
                 <div ><Flame className="text-indigo-500" size={30}/></div>
-                <h1 className="text-2xl font-bold">Roast ME!</h1>
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold">Roast ME!</h1>
             </div>
             <div className="py-2">
                 <button className="px-5 py-1 bg-foreground text-indigo-500 rounded-md flex cursor-pointer">

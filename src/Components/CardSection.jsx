@@ -13,9 +13,9 @@ const Items = [
 export const CardSection = () => {
 
     return (
-        <div className="flex flex-col lg:px-[10rem] sm:px-10 px-20 ">
-            <h1 className="text-6xl font-bold">Features That Burn and Build</h1>
-            <p className="font-semibold text-lg py-2">Upload your resume, website, or portfolio and let our AI give you a brutally honest roast.</p>
+        <div className="flex flex-col md:px-[4rem] lg:px-[5rem] sm:px-10 px-6 ">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold sm:py-4">Features That Burn and Build</h1>
+            <p className="font-semibold text-md md:text-lg py-2">Upload your resume, website, or portfolio and let our AI give you a brutally honest roast.</p>
 
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {Items.map((item,key)=> (

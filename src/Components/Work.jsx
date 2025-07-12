@@ -10,8 +10,8 @@ const items = [
 export const Work = () => {
     return (
         <div className="flex flex-col py-20 md:px-10 pb-20">
-            <div><h1 className="font-bold text-5xl">How it works ?</h1>
-            <p className="text-xl py-3 px-4">Four simple steps to get roasted and improve your professional presence.</p>
+            <div><h1 className="font-bold text-3xl sm:text-4xl md:text-5xl">How it works ?</h1>
+            <p className="text-xl py-3 sm:px-4 px-6">Four simple steps to get roasted and improve your professional presence.</p>
             </div>
             <div className="grid sm:grid-col-2 md:grid-cols-4 px-10 md:px-0 py-10 gap-4">
                 {items.map((item,key)=> (
