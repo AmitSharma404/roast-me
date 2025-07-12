@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-background:hsl(var(--background));
+  --color-foreground:hsl(var(--foreground));
+  --color-primary:hsl(var(--primary));
+  --color-primary-foreground:hsl(var(--primary-foreground));
+  --color-card:hsl(var(--card));
+  --color-border:hsl(var(--border));
+
+  --animate-subtle:subtle 2s ease-in-out forwards;
+
+
+  
+}
+
+@layer base {
+  :root{
+    --background:0 0% 5%;
+    --foreground:0 0% 95%;
+    --primary:270 63% 65%;
+    --primary-foreground: 210 30% 50%;
+    --card:0 0% 90%;
+    --border:0 0% 20%;
+  }
+
+  .dark {
+    --background:0 0% 95%;
+    --foreground:0 0% 5%;
+    --primary:270 63% 65%;
+    --primary-foreground:210 30% 50%;
+    --card:0 0% 10%;
+    --border:0 0% 80%;
+  }
+  
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+
+  body{
+    scroll-behavior: smooth;
+    background-color: #000;
+  }
+
+}
+
+@utility container {
+  margin-inline:0px;
+  padding-inline:0px;
+}
+
+
+
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-align: center;
+}
