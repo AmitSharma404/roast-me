@@ -32,8 +32,9 @@ Database: (if used, e.g., MongoDB / PostgreSQL)
 
 ⚡ Getting Started
 1. Clone the repo
-git clone https://github.com/your-username/roast-my-resume.git
-cd roast-my-resume
+[git clone https://github.com/AmitSharma404/roast-me.git]
+
+(cd roast-my-resume)
 
 2. Install dependencies
 
