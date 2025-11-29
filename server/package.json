@@ -1,0 +1,35 @@
+{
+  "name": "roast-me-server",
+  "version": "1.0.0",
+  "description": "Backend server for Roast Me - AI-powered resume and profile roasting",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "lint": "eslint src/",
+    "test": "node --test tests/"
+  },
+  "keywords": [
+    "roast",
+    "resume",
+    "github",
+    "portfolio",
+    "ai",
+    "openai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "multer": "^2.0.2",
+    "openai": "^4.73.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.15.0"
+  }
+}
