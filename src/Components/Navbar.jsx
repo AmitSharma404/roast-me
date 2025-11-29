@@ -19,13 +19,8 @@ export const Navbar = () => {
     
     },[])
     
-
-    
-
-
-
     return (
-        <nav className={`px-6 py-2 fixed flex justify-between items-center transition-all duration-300 w-full ${
+        <nav className={`px-6 py-2 fixed flex justify-between items-center transition-all duration-300 w-full z-10 ${
         isScrolled ? "bg-transparent shadow-md/5 backdrop-blur-lg" : "bg-transparent"
       }`}>
             <div className="flex items-center justify-center gap-2 px-3 py-2 bg-transparent">

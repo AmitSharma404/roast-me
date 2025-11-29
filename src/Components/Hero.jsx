@@ -2,17 +2,14 @@ import { ChevronRight, Flame } from "lucide-react"
 
 export const Hero = () => {
     return (
-        <div className="flex items-center justify-between py-30 sm:py-50 px-6 sm:px-10 transition-all duration-300 ">
-            <div className="h-20 w-[800px] bg-foreground/30  rounded-[50%] blur-[100px] left-70 -top-5 fixed z-0">
-                
-            </div>
+        <div className="flex items-center justify-between py-30 sm:py-50 px-6 sm:px-10 transition-all duration-300 z-10">
             <div className="grid sm:grid-cols-2 md:text-left gap-10 sm:gap-6 items-center">
                 <div>
                     <h1 className="text-3xl md:text-5xl font-bold text-foreground">Get Your Work Roasted With a Side of Wisdom</h1>
                     <p className="py-5 text-md sm:text-lg text-foreground/60">Upload your resume, GitHub repo, or portfolio and receive <br /> AI-generated roasts that are both hilarious and helpful.</p>
                     <div className="flex items-center justify-center sm:justify-start gap-10">
                         <button className="flex items-center justify-center sm:gap-1 px-3 py-3 bg-foreground text-background rounded-md font-semibold text-sm sm:text-md">
-                            <Flame className="text-orange-500 "/> Start Roasting
+                            <a href="/roast" target="_blank" className="flex items-center justify-center" ><Flame className="text-orange-500 "/> Start Roasting</a>
                         </button>
                         <button className="flex items-center justify-center gap-2 group font-semibold text-sm cursor-pointer">View Example <ChevronRight size={16} className="group-hover:translate-x-1 duration-300"/></button>
                     </div> 

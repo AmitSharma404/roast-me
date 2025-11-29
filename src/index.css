@@ -7,6 +7,7 @@
   --color-primary-foreground:hsl(var(--primary-foreground));
   --color-card:hsl(var(--card));
   --color-border:hsl(var(--border));
+  --color-newbg:hsl(var(--newbg));
 
   --animate-subtle:subtle 2s ease-in-out forwards;
 
@@ -22,6 +23,7 @@
     --primary-foreground: 210 30% 50%;
     --card:0 0% 90%;
     --border:0 0% 20%;
+    --newbg:0 0% 0%;
   }
 
   .dark {
@@ -31,6 +33,7 @@
     --primary-foreground:210 30% 50%;
     --card:0 0% 10%;
     --border:0 0% 80%;
+    --newbg:0 0% 90%;
   }
   
 

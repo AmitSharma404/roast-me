@@ -14,14 +14,14 @@ export const CardSection = () => {
 
     return (
         <div className="flex flex-col md:px-[4rem] lg:px-[5rem] sm:px-10 px-6 ">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold sm:py-4">Features That Burn and Build</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold sm:py-4 ">Features That Burn and Build</h1>
             <p className="font-semibold text-md md:text-lg py-2">Upload your resume, website, or portfolio and let our AI give you a brutally honest roast.</p>
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 ">
                 {Items.map((item,key)=> (
-                    <div key={key} className="border-border/70 border-[1px] px-10 py-10 rounded-2xl hover:border-border">
-                        <div className="flex gap-4 items-center py-2  text-center font-bold"><div className="h-10 w-10 bg-indigo-500/20 text-indigo-500 items-center justify-center flex rounded-lg">{item.icon}</div>{item.name}</div>
-                        <p className="text-foreground/80 text-sm py-2 text-left sm:text-center">{item.desc}</p>
+                    <div key={key} className="border-border/70 border-[1px] md:p-4 lg:p-6 rounded-2xl hover:border-border p-4 bg-background">
+                        <div className="flex md:gap-3 gap-2 items-center md:py-4  text-center font-bold px-2"><div className="h-10 w-10 bg-indigo-500/20 text-indigo-500 items-center justify-center flex rounded-lg">{item.icon}</div>{item.name}</div>
+                        <p className="text-foreground/80 text-sm p-4 sm:py-2 text-left sm:text-center">{item.desc}</p>
                     </div>
                 ))}
             </div>

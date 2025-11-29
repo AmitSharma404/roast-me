@@ -1,10 +1,13 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom";
 
 export const Dark = () => {
 
     const [isDarkmode,setIsDarkmode] = useState(true);
 
+    
+    const location = useLocation();
 
     useEffect(() => {
         const theme = localStorage.getItem('theme');
@@ -27,8 +30,10 @@ export const Dark = () => {
                 localStorage.setItem('theme','dark');
                 setIsDarkmode(true)
             }
-        }
 
+        }
+        
+        if(location.pathname !== '/') return null;
 
 
 

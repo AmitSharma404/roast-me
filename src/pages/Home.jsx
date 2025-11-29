@@ -8,7 +8,10 @@ import { Work } from "../Components/Work"
 
 export const Home = () => {
     return (
-        <div className="text-foreground bg-background min-h-screen w-full overflow-x-hidden">
+        <div className="text-foreground bg-background  min-h-screen w-full overflow-x-hidden relative z-0">
+            <div className="fixed inset-0 -z-10">
+
+            </div>
             <Navbar/>
             <Dark/>
             <main>
