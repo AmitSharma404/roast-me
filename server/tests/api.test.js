@@ -109,7 +109,7 @@ describe('Roast Me API Tests', () => {
       });
       
       // GitHub API may be rate limited or blocked in test environment
-      if (response.status === 500) {
+      if (response.status === 500 || response.status === 502) {
         const data = await response.json();
         // Accept rate limiting or API errors as a valid test result
         assert.strictEqual(data.success, false);

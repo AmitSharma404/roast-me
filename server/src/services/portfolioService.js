@@ -1,3 +1,5 @@
+import { ValidationError, ExternalServiceError } from '../utils/errors.js';
+
 /**
  * Analyze a portfolio website
  * Note: This is a simplified implementation. For production,
@@ -11,10 +13,13 @@ export const analyzePortfolio = async (url) => {
   try {
     validUrl = new URL(url);
     if (!['http:', 'https:'].includes(validUrl.protocol)) {
-      throw new Error('URL must use HTTP or HTTPS protocol');
+      throw new ValidationError('URL must use HTTP or HTTPS protocol');
     }
-  } catch {
-    throw new Error(`Invalid URL format: ${url}`);
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      throw error;
+    }
+    throw new ValidationError(`Invalid URL format: ${url}`);
   }
 
   try {
@@ -24,14 +29,14 @@ export const analyzePortfolio = async (url) => {
     const response = await fetch(validUrl.href, {
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; RoastMe/1.0; +https://github.com/AmitSharma404/roast-me)'
+        'User-Agent': process.env.USER_AGENT || 'Mozilla/5.0 (compatible; RoastMeBot/1.0)'
       }
     });
 
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-      throw new Error(`Website returned status ${response.status}`);
+      throw new ExternalServiceError(`Website returned status ${response.status}`, 'portfolio');
     }
 
     const html = await response.text();
@@ -44,9 +49,12 @@ export const analyzePortfolio = async (url) => {
     };
   } catch (error) {
     if (error.name === 'AbortError') {
-      throw new Error('Website took too long to respond');
+      throw new ExternalServiceError('Website took too long to respond', 'portfolio');
     }
-    throw new Error(`Failed to analyze portfolio: ${error.message}`);
+    if (error instanceof ExternalServiceError) {
+      throw error;
+    }
+    throw new ExternalServiceError(`Failed to analyze portfolio: ${error.message}`, 'portfolio');
   }
 };
 

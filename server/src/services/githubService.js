@@ -1,3 +1,5 @@
+import { ValidationError, NotFoundError, ExternalServiceError } from '../utils/errors.js';
+
 /**
  * Fetch GitHub profile data using public API
  * @param {string} username - GitHub username
@@ -7,7 +9,7 @@ export const fetchGitHubProfile = async (username) => {
   // Validate username format
   const usernameRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
   if (!usernameRegex.test(username)) {
-    throw new Error('Invalid GitHub username format');
+    throw new ValidationError('Invalid GitHub username format');
   }
 
   try {
@@ -15,11 +17,11 @@ export const fetchGitHubProfile = async (username) => {
     const userResponse = await fetch(`https://api.github.com/users/${username}`);
     
     if (userResponse.status === 404) {
-      throw new Error(`GitHub user '${username}' not found`);
+      throw new NotFoundError(`GitHub user '${username}' not found`);
     }
     
     if (!userResponse.ok) {
-      throw new Error(`GitHub API error: ${userResponse.statusText}`);
+      throw new ExternalServiceError(`GitHub API error: ${userResponse.statusText}`, 'github');
     }
     
     const userData = await userResponse.json();
@@ -52,16 +54,16 @@ export const fetchGitHubProfile = async (username) => {
         language: repo.language,
         stars: repo.stargazers_count,
         forks: repo.forks_count,
-        updated_at: repo.updated_at,
-        has_readme: true // Assumption, would need separate API call to verify
+        updated_at: repo.updated_at
       })),
       stats: stats
     };
   } catch (error) {
-    if (error.message.includes('not found') || error.message.includes('Invalid')) {
+    // Re-throw custom errors directly
+    if (error.name === 'ValidationError' || error.name === 'NotFoundError' || error.name === 'ExternalServiceError') {
       throw error;
     }
-    throw new Error(`Failed to fetch GitHub profile: ${error.message}`);
+    throw new ExternalServiceError(`Failed to fetch GitHub profile: ${error.message}`, 'github');
   }
 };
 

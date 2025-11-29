@@ -4,6 +4,7 @@ import { fetchGitHubProfile } from '../services/githubService.js';
 import { analyzePortfolio } from '../services/portfolioService.js';
 import { ROAST_LEVELS } from '../utils/constants.js';
 import { validateRoastLevel } from '../utils/validators.js';
+import { ValidationError } from '../utils/errors.js';
 import fs from 'fs/promises';
 
 /**
@@ -22,16 +23,13 @@ export const getRoastLevels = (req, res) => {
 export const roastResume = async (req, res, next) => {
   try {
     if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        error: 'No resume file uploaded'
-      });
+      throw new ValidationError('No resume file uploaded');
     }
 
     const { level = 'spicy' } = req.body;
     const levelError = validateRoastLevel(level);
     if (levelError) {
-      return res.status(400).json({ success: false, error: levelError });
+      throw new ValidationError(levelError);
     }
 
     // Parse the resume
@@ -66,15 +64,12 @@ export const roastGitHub = async (req, res, next) => {
     const { username, level = 'spicy' } = req.body;
 
     if (!username) {
-      return res.status(400).json({
-        success: false,
-        error: 'GitHub username is required'
-      });
+      throw new ValidationError('GitHub username is required');
     }
 
     const levelError = validateRoastLevel(level);
     if (levelError) {
-      return res.status(400).json({ success: false, error: levelError });
+      throw new ValidationError(levelError);
     }
 
     // Fetch GitHub profile data
@@ -109,15 +104,12 @@ export const roastPortfolio = async (req, res, next) => {
     const { url, level = 'spicy' } = req.body;
 
     if (!url) {
-      return res.status(400).json({
-        success: false,
-        error: 'Portfolio URL is required'
-      });
+      throw new ValidationError('Portfolio URL is required');
     }
 
     const levelError = validateRoastLevel(level);
     if (levelError) {
-      return res.status(400).json({ success: false, error: levelError });
+      throw new ValidationError(levelError);
     }
 
     // Analyze portfolio website

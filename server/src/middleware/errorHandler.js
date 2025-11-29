@@ -1,3 +1,5 @@
+import { ApiError } from '../utils/errors.js';
+
 /**
  * Global error handler middleware
  */
@@ -8,38 +10,35 @@ export const errorHandler = (err, req, res, _next) => {
   if (err.code === 'LIMIT_FILE_SIZE') {
     return res.status(400).json({
       success: false,
-      error: 'File size exceeds the maximum allowed limit'
+      error: 'File size exceeds the maximum allowed limit',
+      code: 'FILE_SIZE_LIMIT'
     });
   }
 
-  if (err.message.includes('Invalid file type')) {
+  // Handle multer file type errors
+  if (err.code === 'LIMIT_UNEXPECTED_FILE' || err.name === 'MulterError') {
     return res.status(400).json({
       success: false,
-      error: err.message
+      error: err.message || 'File upload error',
+      code: 'FILE_UPLOAD_ERROR'
     });
   }
 
-  // Handle validation errors
-  if (err.message.includes('Invalid') || err.message.includes('required')) {
-    return res.status(400).json({
+  // Handle custom API errors
+  if (err instanceof ApiError) {
+    return res.status(err.statusCode).json({
       success: false,
-      error: err.message
-    });
-  }
-
-  // Handle not found errors
-  if (err.message.includes('not found')) {
-    return res.status(404).json({
-      success: false,
-      error: err.message
+      error: err.message,
+      code: err.code
     });
   }
 
   // Handle CORS errors
-  if (err.message.includes('CORS')) {
+  if (err.message && err.message.includes('CORS')) {
     return res.status(403).json({
       success: false,
-      error: 'Not allowed by CORS policy'
+      error: 'Not allowed by CORS policy',
+      code: 'CORS_ERROR'
     });
   }
 
@@ -51,6 +50,7 @@ export const errorHandler = (err, req, res, _next) => {
 
   res.status(statusCode).json({
     success: false,
-    error: message
+    error: message,
+    code: 'INTERNAL_ERROR'
   });
 };

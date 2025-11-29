@@ -1,6 +1,7 @@
 import fs from 'fs/promises';
 import pdf from 'pdf-parse/lib/pdf-parse.js';
 import path from 'path';
+import { FileError, ValidationError } from '../utils/errors.js';
 
 /**
  * Parse resume file content
@@ -15,7 +16,7 @@ export const parseResume = async (filePath) => {
   } else if (ext === '.txt') {
     return parseText(filePath);
   } else {
-    throw new Error(`Unsupported file format: ${ext}`);
+    throw new ValidationError(`Unsupported file format: ${ext}`);
   }
 };
 
@@ -30,15 +31,15 @@ const parsePDF = async (filePath) => {
     const data = await pdf(dataBuffer);
     
     if (!data.text || data.text.trim().length === 0) {
-      throw new Error('Could not extract text from PDF. The file may be empty or image-based.');
+      throw new FileError('Could not extract text from PDF. The file may be empty or image-based.');
     }
     
     return data.text.trim();
   } catch (error) {
-    if (error.message.includes('Could not extract')) {
+    if (error instanceof FileError) {
       throw error;
     }
-    throw new Error(`Failed to parse PDF: ${error.message}`);
+    throw new FileError(`Failed to parse PDF: ${error.message}`);
   }
 };
 
@@ -52,14 +53,14 @@ const parseText = async (filePath) => {
     const content = await fs.readFile(filePath, 'utf-8');
     
     if (!content || content.trim().length === 0) {
-      throw new Error('The text file is empty.');
+      throw new FileError('The text file is empty.');
     }
     
     return content.trim();
   } catch (error) {
-    if (error.message.includes('empty')) {
+    if (error instanceof FileError) {
       throw error;
     }
-    throw new Error(`Failed to read text file: ${error.message}`);
+    throw new FileError(`Failed to read text file: ${error.message}`);
   }
 };
